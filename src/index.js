@@ -94,11 +94,45 @@ let productsCollection = [{
   }
 ];
 
+/*************************************************** */
+/*                   VARIABLE                        */
+/*************************************************** */
+
+let productsTable = document.querySelector(".js-products-list tbody");
+//console.log(productsTable);
+
 /*
  * Affiche la collection products dans le tableau portant la classe "js-products-list"
 */
 function displayProducts(products) {
-
+  for (let i = 0; i < products.length; i++) {
+    //Pour chaque produit, il faut creer une ligne de tableau 
+    // avec 2 colonnes: une pour le nom et une autre pour l'image
+    const row = document.createElement("tr");
+    const cellName = document.createElement("td");
+    const cellImg = document.createElement("td");
+    const img = document.createElement("img");
+    let cellProductName = "";
+    let cellSrcImg = "";
+    //recupere le nom du produit si existante
+    productsCollection[i].product_name ? cellProductName = productsCollection[i].product_name : "";  
+    //console.log(cellName);
+    //ajoute le nom du produit a cellName
+    cellName.append(cellProductName);
+    //ajoute cellName au row
+    row.append(cellName);
+    //ajoute le row au tbody
+    productsTable.append(row);
+    //recupere la source de l'image si existante
+    productsCollection[i].image_front_small_url ? cellSrcImg = productsCollection[i].image_front_small_url : ""; 
+    //ajoute l'attribut source
+    if (cellSrcImg != "") {
+      cellImg.append(img);
+      row.append(cellImg);
+      img.setAttribute("src", cellSrcImg);
+    }
+    console.log(cellImg); 
+  };
 }
 
 /*
@@ -151,5 +185,5 @@ function onUpdateProduct(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+displayProducts(productsCollection);
 });
