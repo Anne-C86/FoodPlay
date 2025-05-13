@@ -99,7 +99,7 @@ let productsCollection = [{
 /*************************************************** */
 
 let productsTable = document.querySelector(".js-products-list tbody");
-//console.log(productsTable);
+let modale = document.querySelector(".js-modale-container");
 
 /*
  * Affiche la collection products dans le tableau portant la classe "js-products-list"
@@ -139,14 +139,14 @@ function displayProducts(products) {
  * Affiche la modale avec formulaire d'ajout d'un produit
  */
 function onAddProduct() {
-
+  modale.classList.add("visible");
 }
 
 /*
  * Ferme la modale
  */
 function onCloseModale() {
-
+  modale.classList.remove("visible");
 }
 
 /*
@@ -185,5 +185,12 @@ function onUpdateProduct(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-displayProducts(productsCollection);
+  displayProducts(productsCollection);
+
+  let addButton = document.querySelector(".js-add-product");
+  let closeModaleButton = document.querySelector(".js-close-button");
+  addButton.addEventListener("click", onAddProduct);
+  closeModaleButton.addEventListener("click", onCloseModale);
+
+
 });
